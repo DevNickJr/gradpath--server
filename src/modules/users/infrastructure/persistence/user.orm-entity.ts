@@ -1,0 +1,30 @@
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne } from "typeorm";
+import { UserProfileOrmEntity } from "./user-profile.orm-entity";
+import { RolesEnum } from "@/shared/interfaces";
+
+@Entity("users")
+export class UserOrmEntity {
+  @PrimaryGeneratedColumn("uuid")
+  id!: string;
+
+  @Column({ unique: true })
+  email!: string;
+
+  @Column()
+  password!: string;
+
+  @Column({ default: RolesEnum.STUDENT })
+  role!: string;
+
+  @Column({ default: false })
+  isVerified!: boolean;
+
+  @OneToOne(() => UserProfileOrmEntity, profile => profile.user, { cascade: true, eager: true })
+  profile?: UserProfileOrmEntity;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
+}
