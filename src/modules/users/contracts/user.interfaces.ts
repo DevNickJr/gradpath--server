@@ -9,5 +9,6 @@ export interface UserRepository {
 
 export enum RolesEnum {
   STUDENT = "student",
+  AGENT = "agent",
   ADMIN = "admin",
 }

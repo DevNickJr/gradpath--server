@@ -8,18 +8,19 @@ import { IdParam } from "@/shared/schemas";
 
 export const opportunityRoutes = (controller: OpportunityController) => {
   const router = Router();
-
+  
   // Public
   router.get("/", validateRequest([SearchOpportunityQuerySchema]), controller.search);
-
+  
   // Admin only
   router.post(
     "/",
     AuthGuard,
-    RoleGuard([RolesEnum.ADMIN]),
+    RoleGuard([RolesEnum.ADMIN, RolesEnum.AGENT]),
     validateRequest([CreateOpportunitySchema]),
     controller.create
   );
+  
   router.patch(
     "/:id",
     AuthGuard,
@@ -27,16 +28,21 @@ export const opportunityRoutes = (controller: OpportunityController) => {
     validateRequest([UpdateOpportunitySchema, IdParam]),
     controller.update
   );
+  
   router.delete(
     "/:id",
     AuthGuard,
-    RoleGuard([RolesEnum.ADMIN]),
+    RoleGuard([RolesEnum.ADMIN, RolesEnum.AGENT]),
     validateRequest([IdParam]),
     controller.delete
   );
-
+  
   // Public (after specific routes)
-  router.get("/:id", controller.getOne);
-
+  router.get(
+    "/:id",
+    validateRequest([IdParam]),
+    controller.getOne
+  );
+  
   return router;
 };

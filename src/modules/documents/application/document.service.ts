@@ -55,6 +55,7 @@ export class DocumentService {
     const saved = await this.documentRepo.create(doc);
 
     try {
+      // TODO: Process asynchronously
       const { system, user: userPrompt } = buildPrompt(
         dto.type as DocumentType,
         profile,

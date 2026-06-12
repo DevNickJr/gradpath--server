@@ -3,12 +3,13 @@ import { DocumentController } from "./document.controller";
 import { AuthGuard } from "@/shared/middlewares/auth.middleware";
 import validateRequest from "@/shared/middlewares/validate-request";
 import { GenerateDocumentSchema } from "../contracts/document.schemas";
+import { PaginationQuerySchema } from "@/shared/schemas";
 
 export const documentRoutes = (controller: DocumentController) => {
   const router = Router();
 
   router.post("/generate", AuthGuard, validateRequest([GenerateDocumentSchema]), controller.generate);
-  router.get("/", AuthGuard, controller.getAll);
+  router.get("/", AuthGuard, validateRequest([PaginationQuerySchema]), controller.getAll);
   router.get("/:id", AuthGuard, controller.getOne);
   router.delete("/:id", AuthGuard, controller.delete);
 

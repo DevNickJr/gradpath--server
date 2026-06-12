@@ -17,11 +17,15 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
+    const id = crypto.randomUUID();
     const user = new User(
-      crypto.randomUUID(),
+      id,
       dto.email,
-      hashedPassword 
+      hashedPassword,
+      dto.role,
     );
+
+    console.log({id})
 
     return this.userRepo.create(user);
   }

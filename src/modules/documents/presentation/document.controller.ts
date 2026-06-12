@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { DocumentService } from "../application/document.service";
+import { PaginationQueryDTO } from "@/shared/schemas";
 
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
@@ -15,9 +16,8 @@ export class DocumentController {
 
   getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const page = Number(req.query.page) || 1;
-      const limit = Number(req.query.limit) || 20;
-      const result = await this.documentService.getDocuments(req.user!.id, page, limit);
+      const query = req.query as unknown as PaginationQueryDTO;
+      const result = await this.documentService.getDocuments(req.user!.id, query.page, query.limit);
       res.json({ success: true, ...result });
     } catch (error) {
       next(error);

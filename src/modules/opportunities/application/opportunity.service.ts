@@ -57,10 +57,15 @@ export class OpportunityService {
     return this.opportunityRepo.update(opp);
   }
 
-  async delete(id: string) {
-    const opp = await this.opportunityRepo.findById(id);
+  async delete(query: {
+    ownerId: string;
+    opportunityId: string;
+  }) {
+    const opp = await this.opportunityRepo.findById(query.opportunityId);
     if (!opp) throw new CustomError("Opportunity not found", 404);
-    await this.opportunityRepo.delete(id);
+
+    if (opp.createdById == query.ownerId)
+    await this.opportunityRepo.delete(query.opportunityId);
   }
 
   async search(query: SearchOpportunityQuery) {

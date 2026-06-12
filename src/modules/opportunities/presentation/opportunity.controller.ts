@@ -34,7 +34,10 @@ export class OpportunityController {
 
   delete = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await this.opportunityService.delete(req.params.id as string);
+      await this.opportunityService.delete({
+        opportunityId: req.params.id as string,
+        ownerId: req.user!.id
+      });
       res.json({ success: true, message: "Opportunity deleted" });
     } catch (error) {
       next(error);
