@@ -41,9 +41,13 @@ export class UserService {
     const user = await this.userRepo.findById(userId);
     if (!user) throw new Error("User not found");
 
-    const cur = user.profile || new UserProfile("", "", "");
+    const cur = user.profile || new UserProfile("", "", "", "");
+    console.log({
+      cur
+    })
 
     user.profile = new UserProfile(
+      cur.id || crypto.randomUUID(),
       dto.firstName ?? cur.firstName,
       dto.lastName ?? cur.lastName,
       dto.phoneNumber ?? cur.phoneNumber,
@@ -62,6 +66,10 @@ export class UserService {
       dto.skills ?? cur.skills,
     );
 
+    console.log({
+      cur,
+      now: user.profile
+    })
     return this.userRepo.update(user);
   }
 }
