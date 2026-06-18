@@ -1,9 +1,18 @@
+import { OpportunityMapper } from "@/modules/opportunities/infrastructure/persistence/opportunity.mapper";
 import { SavedOpportunity } from "../../domain/saved-opportunity";
 import { SavedOpportunityOrmEntity } from "./saved-opportunity.orm-entity";
 
 export class SavedOpportunityMapper {
   static toDomain(entity: SavedOpportunityOrmEntity): SavedOpportunity {
-    return new SavedOpportunity(entity.id, entity.userId, entity.opportunityId, entity.createdAt);
+    return new SavedOpportunity(
+      entity.id,
+      entity.userId,
+      entity.opportunityId,
+      entity.createdAt,
+      entity.opportunity
+        ? OpportunityMapper.toDomain(entity.opportunity)
+        : undefined
+    );
   }
 
   static toPersistence(saved: SavedOpportunity): SavedOpportunityOrmEntity {
