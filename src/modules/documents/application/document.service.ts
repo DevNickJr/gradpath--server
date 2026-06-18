@@ -27,7 +27,7 @@ export class DocumentService {
     const user = await this.userRepo.findById(userId);
     if (!user) throw new CustomError("User not found", 404);
 
-    const profile = user.profile || new UserProfile("", "", "");
+    const profile = user.profile || new UserProfile("", "", "", "");
 
     let opportunity;
     if (dto.opportunityId) {
@@ -40,17 +40,16 @@ export class DocumentService {
       : DOCUMENT_TITLES[dto.type];
 
     // Create document record with pending status
-    const doc = new Document(
-      crypto.randomUUID(),
+    const doc = new Document({
+      id: crypto.randomUUID(),
       userId,
-      dto.type as DocumentType,
+      type: dto.type as DocumentType,
       title,
-      dto.prompt,
-      "",
-      DocumentStatus.GENERATING,
-      {},
-      dto.opportunityId,
-    );
+      content: "",
+      status: DocumentStatus.GENERATING,
+      metadata: {},
+      opportunityId: dto.opportunityId || null,
+    });
 
     const saved = await this.documentRepo.create(doc);
 

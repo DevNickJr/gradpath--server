@@ -27,8 +27,12 @@ const envSchema = z.object({
   ALLOWED_HOSTS: z.string().optional(),
 
   // OpenAI
-  OPENAI_API_KEY: z.string().default(''),
+  OPENAI_API_KEY: z.string(),
   OPENAI_MODEL: z.string().default('gpt-4o-mini'),
+  GROQ_API_KEY: z.string(),
+  GROQ_MODEL: z.string().default('openai/gpt-oss-20b'),
+  GEMINI_API_KEY: z.string(),
+  GEMINI_MODEL: z.string().default('gemini-2.5-flash'),
 });
 
 const parsed = envSchema.safeParse(process.env);

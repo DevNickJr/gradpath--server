@@ -18,8 +18,12 @@ export class DocumentController {
     try {
       const query = req.query as unknown as PaginationQueryDTO;
       const result = await this.documentService.getDocuments(req.user!.id, query.page, query.limit);
+      console.log({
+        result
+      })
       res.json({ success: true, ...result });
     } catch (error) {
+      console.log({error})
       next(error);
     }
   };

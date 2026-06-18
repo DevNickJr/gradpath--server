@@ -3,19 +3,19 @@ import { DocumentOrmEntity } from "./document.orm-entity";
 
 export class DocumentMapper {
   static toDomain(entity: DocumentOrmEntity): Document {
-    return new Document(
-      entity.id,
-      entity.userId,
-      entity.type as DocumentType,
-      entity.title,
-      entity.prompt,
-      entity.content,
-      entity.status as DocumentStatus,
-      entity.metadata || {},
-      entity.opportunityId,
-      entity.createdAt,
-      entity.updatedAt,
-    );
+    return new Document({
+      id: entity.id,
+      userId: entity.userId,
+      type: entity.type as DocumentType,
+      title: entity.title,
+      prompt: entity.prompt,
+      content: entity.content,
+      status: entity.status as DocumentStatus,
+      metadata: entity.metadata || {},
+      opportunityId: entity.opportunityId,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+    })
   }
 
   static toPersistence(doc: Document): DocumentOrmEntity {
@@ -28,7 +28,7 @@ export class DocumentMapper {
     entity.content = doc.content;
     entity.status = doc.status;
     entity.metadata = doc.metadata;
-    entity.opportunityId = doc.opportunityId;
+    entity.opportunityId = doc.opportunityId || undefined;
     entity.createdAt = doc.createdAt;
     entity.updatedAt = doc.updatedAt;
     return entity;

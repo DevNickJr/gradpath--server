@@ -16,7 +16,7 @@ export class DocumentOrmEntity {
   title!: string;
 
   @Column({ type: "text" })
-  prompt!: string;
+  prompt?: string;
 
   @Column({ type: "text", default: "" })
   content!: string;

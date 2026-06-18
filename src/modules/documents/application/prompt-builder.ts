@@ -39,7 +39,7 @@ function formatOpportunity(opp: Opportunity): string {
 export function buildPrompt(
   type: DocumentType,
   userProfile: UserProfile,
-  userInstructions: string,
+  userInstructions?: string,
   opportunity?: Opportunity,
 ): { system: string; user: string } {
   const profileText = formatProfile(userProfile);
@@ -59,7 +59,9 @@ export function buildPrompt(
     userPrompt += `## Target Opportunity\n${oppText}\n\n`;
   }
 
-  userPrompt += `## Instructions\n${userInstructions}`;
+  if (userInstructions) {
+    userPrompt += `## Instructions\n${userInstructions}`;
+  }
 
   return {
     system: systemPrompts[type],

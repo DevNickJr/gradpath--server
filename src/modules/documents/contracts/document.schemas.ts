@@ -3,7 +3,7 @@ import z from "zod";
 export const GenerateDocumentSchema = z.object({
   body: z.object({
     type: z.enum(["cv", "sop", "research_proposal"]),
-    prompt: z.string().min(10).max(5000),
+    prompt: z.string().max(5000).optional(),
     opportunityId: z.string().uuid().optional(),
   })
 });
