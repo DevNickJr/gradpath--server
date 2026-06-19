@@ -33,6 +33,9 @@ export class UserProfileOrmEntity {
   @Column({ type: "decimal", nullable: true })
   gpa?: number;
 
+  @Column({ type: "decimal", default: 5 })
+  gpaScale?: number;
+
   @Column({ type: "int", nullable: true })
   graduationYear?: number;
 

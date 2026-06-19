@@ -26,6 +26,7 @@ export class UserMapper {
         entity.profile.publications,
         entity.profile.workExperience,
         entity.profile.skills,
+        entity.profile.gpaScale ? Number(entity.profile.gpaScale) : undefined,
       );
     }
 
@@ -64,6 +65,7 @@ export class UserMapper {
       p.degree = user.profile.degree;
       p.fieldOfStudy = user.profile.fieldOfStudy;
       p.gpa = user.profile.gpa;
+      p.gpaScale = user.profile.gpaScale;
       p.graduationYear = user.profile.graduationYear;
       p.countryOfOrigin = user.profile.countryOfOrigin;
       p.targetCountries = user.profile.targetCountries;

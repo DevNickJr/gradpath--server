@@ -6,7 +6,6 @@ export interface UserRepository {
   findByEmail(email: string): Promise<User | null>;
   update(user: User): Promise<User>;
 }
-
 export enum RolesEnum {
   STUDENT = "student",
   AGENT = "agent",

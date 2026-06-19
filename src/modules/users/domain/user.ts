@@ -32,5 +32,6 @@ export class UserProfile {
     public publications?: string[],
     public workExperience?: string,
     public skills?: string[],
+    public gpaScale?: number,
   ) {}
 }

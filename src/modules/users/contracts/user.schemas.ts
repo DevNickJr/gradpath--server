@@ -1,4 +1,5 @@
 import z from "zod";
+import { RolesEnum } from "./user.interfaces";
 
 export const UpdateProfileSchema = z.object({
   body: z.object({
@@ -18,7 +19,20 @@ export const UpdateProfileSchema = z.object({
     publications: z.array(z.string()).optional(),
     workExperience: z.string().max(5000).optional(),
     skills: z.array(z.string()).optional(),
+    gpaScale: z.number().min(4).max(5).default(5),
   })
 });
 
 export type UpdateProfileDTO = z.infer<typeof UpdateProfileSchema>["body"];
+
+
+export const UpdateRoleSchema = z.object({
+  body: z.object({
+    userId: z.string().min(1, { error: "userId must be provided" }),
+    role: z.enum(RolesEnum, {
+      error: "Role must be one of the approved roles"
+    }),
+  })
+});
+
+export type UpdateRoleDTO = z.infer<typeof UpdateRoleSchema>["body"];

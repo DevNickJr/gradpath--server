@@ -44,4 +44,16 @@ export class UserController {
       next(error);
     }
   };
+
+  makeAdminOrAgent = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user?.id;
+      if (!userId) throw new CustomError('User is not authorized', 403);
+
+      const user = await this.userService.updateRole(userId, req.body);
+      res.json({ success: true, data: user });
+    } catch (error) {
+      next(error);
+    }
+  };
 }

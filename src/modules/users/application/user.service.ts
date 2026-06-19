@@ -1,7 +1,8 @@
 import { User, UserProfile } from "@/modules/users/domain/user";
-import { UserRepository } from "@/modules/users/contracts/user.interfaces";
+import { RolesEnum, UserRepository } from "@/modules/users/contracts/user.interfaces";
 import { CreateUserDTO } from "@/modules/auth/contracts/auth.schemas";
-import { UpdateProfileDTO } from "@/modules/users/contracts/user.schemas";
+import { UpdateProfileDTO, UpdateRoleDTO } from "@/modules/users/contracts/user.schemas";
+import CustomError from "@/shared/utils/custom-error";
 
 export class UserService {
   constructor(private readonly userRepo: UserRepository) {}
@@ -42,9 +43,6 @@ export class UserService {
     if (!user) throw new Error("User not found");
 
     const cur = user.profile || new UserProfile("", "", "", "");
-    console.log({
-      cur
-    })
 
     user.profile = new UserProfile(
       cur.id || crypto.randomUUID(),
@@ -64,12 +62,23 @@ export class UserService {
       dto.publications ?? cur.publications,
       dto.workExperience ?? cur.workExperience,
       dto.skills ?? cur.skills,
+      dto.gpaScale ?? cur.gpaScale,
     );
 
-    console.log({
-      cur,
-      now: user.profile
-    })
+    return this.userRepo.update(user);
+  }
+
+  async updateRole(userId: string, dto: UpdateRoleDTO) {
+    const admin = await this.userRepo.findById(userId);
+    if (!admin) throw new Error("User not found");
+
+    if (admin.role !== RolesEnum.ADMIN) throw new CustomError("You are not authorized to perform this actiion ", 401);
+
+    const user = await this.userRepo.findById(dto.userId);
+    if (!user) throw new Error("User does not exist");
+
+    user.role = dto.role;
+
     return this.userRepo.update(user);
   }
 }
