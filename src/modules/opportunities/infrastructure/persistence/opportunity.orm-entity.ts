@@ -33,7 +33,7 @@ export class OpportunityOrmEntity {
   @Column({ type: "simple-json", default: "[]" })
   benefits!: string[];
 
-  @Column({ type: "datetime" })
+  @Column({ type: "timestamp" })
   deadline!: Date;
 
   @Column()

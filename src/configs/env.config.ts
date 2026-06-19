@@ -8,7 +8,7 @@ const envSchema = z.object({
     .enum(['development', 'production', 'test'])
     .default('development'),
   PORT: z.coerce.number().default(4001),
-
+  
   // database
   DB_TYPE: z.enum(['better-sqlite3', 'postgres']).default('better-sqlite3'),
   DB_HOST: z.string().default('localhost'),
@@ -16,6 +16,12 @@ const envSchema = z.object({
   DB_USER: z.string().default('postgres'),
   DB_PASS: z.string().default('postgres'),
   DB_NAME: z.string().default('database.sqlite'),
+  // DB_TYPE: z.enum(['better-sqlite3', 'postgres']).default('better-sqlite3'),
+  // DB_HOST: z.string().default('localhost'),
+  // DB_PORT: z.coerce.number().default(5432),
+  // DB_USER: z.string().default('postgres'),
+  // DB_PASS: z.string().default('postgres'),
+  // DB_NAME: z.string().default('database.sqlite'),
 
   // auth
   JWT_SECRET: z.string(),
