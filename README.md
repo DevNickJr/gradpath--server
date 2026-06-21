@@ -110,3 +110,11 @@ Active development (MVP stage)
 - Event-driven architecture for scaling AI workflows
 - Asynchronous processing for document generation
 - Improved personalization using behavioral data
+
+<!-- TODO -->
+[] - monitor user counts before signup
+[] - Limit AI usage per user per day and per month
+[] - Queue based notification system (emails)
+[] - Message Broker (RabbitMQ)
+[] - AI Chatbot to guide users, 
+[] - 
