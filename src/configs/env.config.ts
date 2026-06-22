@@ -36,7 +36,7 @@ const envSchema = z.object({
   OPENAI_API_KEY: z.string(),
   OPENAI_MODEL: z.string().default('gpt-4o-mini'),
   GROQ_API_KEY: z.string(),
-  GROQ_MODEL: z.string().default('openai/gpt-oss-20b'),
+  GROQ_MODEL: z.string().default('openai/gpt-oss-20b'), // groq/compound (free - 250 req/day)
   GEMINI_API_KEY: z.string(),
   GEMINI_MODEL: z.string().default('gemini-2.5-flash'),
 });
