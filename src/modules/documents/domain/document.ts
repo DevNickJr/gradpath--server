@@ -2,6 +2,9 @@ export enum DocumentType {
   CV = "cv",
   SOP = "sop",
   RESEARCH_PROPOSAL = "research_proposal",
+  COLD_EMAIL = "cold_email",
+  FEE_WAIVER = "fee_waiver",
+  PERSONAL_STATEMENT = "personal_statement",
 }
 
 export enum DocumentStatus {
@@ -47,18 +50,4 @@ export class Document {
   opportunityId?: string | null;
   createdAt!: Date;
   updatedAt!: Date;
-
-  // constructor(
-  //   public readonly id: string,
-  //   public userId: string,
-  //   public type: DocumentType,
-  //   public title: string,
-  //   public content: string,
-  //   public status: DocumentStatus = DocumentStatus.PENDING,
-  //   public metadata: Record<string, any> = {},
-  //   public opportunityId?: string,
-  //   public createdAt: Date = new Date(),
-  //   public updatedAt: Date = new Date(),
-  //   public prompt?: string,
-  // ) {}
 }

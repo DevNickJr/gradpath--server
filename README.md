@@ -117,4 +117,4 @@ Active development (MVP stage)
 [] - Queue based notification system (emails)
 [] - Message Broker (RabbitMQ)
 [] - AI Chatbot to guide users, 
-[] - 
+[] - Event based processing (Message broker - redis/rabitmq) on search of a particular kind of masters (use the event for notification/analytics/recommendation updates for the user)

@@ -2,7 +2,7 @@ import z from "zod";
 
 export const GenerateDocumentSchema = z.object({
   body: z.object({
-    type: z.enum(["cv", "sop", "research_proposal"]),
+    type: z.enum(["cv", "sop", "research_proposal", "cold_email", "fee_waiver", "personal_statement"]),
     prompt: z.string().max(5000).optional(),
     opportunityId: z.string().uuid().optional(),
   })

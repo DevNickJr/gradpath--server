@@ -22,24 +22,6 @@ export class UserProfileOrmEntity {
   profileImage?: string;
 
   @Column({ nullable: true })
-  university?: string;
-
-  @Column({ nullable: true })
-  degree?: string;
-
-  @Column({ nullable: true })
-  fieldOfStudy?: string;
-
-  @Column({ type: "decimal", nullable: true })
-  gpa?: number;
-
-  @Column({ type: "decimal", default: 5 })
-  gpaScale?: number;
-
-  @Column({ type: "int", nullable: true })
-  graduationYear?: number;
-
-  @Column({ nullable: true })
   countryOfOrigin?: string;
 
   @Column({ type: "simple-json", nullable: true })
@@ -47,15 +29,6 @@ export class UserProfileOrmEntity {
 
   @Column({ type: "simple-json", nullable: true })
   researchInterests?: string[];
-
-  @Column({ type: "simple-json", nullable: true })
-  publications?: string[];
-
-  @Column({ type: "text", nullable: true })
-  workExperience?: string;
-
-  @Column({ type: "simple-json", nullable: true })
-  skills?: string[];
 
   @OneToOne(() => UserOrmEntity, user => user.profile)
   @JoinColumn()

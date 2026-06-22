@@ -21,17 +21,8 @@ export class UserProfile {
     public phoneNumber: string,
     public bio?: string,
     public profileImage?: string,
-    public university?: string,
-    public degree?: string,
-    public fieldOfStudy?: string,
-    public gpa?: number,
-    public graduationYear?: number,
     public countryOfOrigin?: string,
     public targetCountries?: string[],
     public researchInterests?: string[],
-    public publications?: string[],
-    public workExperience?: string,
-    public skills?: string[],
-    public gpaScale?: number,
   ) {}
 }

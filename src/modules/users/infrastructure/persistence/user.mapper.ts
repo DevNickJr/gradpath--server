@@ -15,18 +15,9 @@ export class UserMapper {
         entity.profile.phoneNumber || "",
         entity.profile.bio,
         entity.profile.profileImage,
-        entity.profile.university,
-        entity.profile.degree,
-        entity.profile.fieldOfStudy,
-        entity.profile.gpa ? Number(entity.profile.gpa) : undefined,
-        entity.profile.graduationYear,
         entity.profile.countryOfOrigin,
         entity.profile.targetCountries,
         entity.profile.researchInterests,
-        entity.profile.publications,
-        entity.profile.workExperience,
-        entity.profile.skills,
-        entity.profile.gpaScale ? Number(entity.profile.gpaScale) : undefined,
       );
     }
 
@@ -61,18 +52,9 @@ export class UserMapper {
       p.phoneNumber = user.profile.phoneNumber;
       p.bio = user.profile.bio;
       p.profileImage = user.profile.profileImage;
-      p.university = user.profile.university;
-      p.degree = user.profile.degree;
-      p.fieldOfStudy = user.profile.fieldOfStudy;
-      p.gpa = user.profile.gpa;
-      p.gpaScale = user.profile.gpaScale;
-      p.graduationYear = user.profile.graduationYear;
       p.countryOfOrigin = user.profile.countryOfOrigin;
       p.targetCountries = user.profile.targetCountries;
       p.researchInterests = user.profile.researchInterests;
-      p.publications = user.profile.publications;
-      p.workExperience = user.profile.workExperience;
-      p.skills = user.profile.skills;
       p.userId = user.id;
       entity.profile = p;
     }

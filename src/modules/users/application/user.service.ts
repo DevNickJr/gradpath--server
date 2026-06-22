@@ -51,18 +51,9 @@ export class UserService {
       dto.phoneNumber ?? cur.phoneNumber,
       dto.bio ?? cur.bio,
       dto.profileImage ?? cur.profileImage,
-      dto.university ?? cur.university,
-      dto.degree ?? cur.degree,
-      dto.fieldOfStudy ?? cur.fieldOfStudy,
-      dto.gpa ?? cur.gpa,
-      dto.graduationYear ?? cur.graduationYear,
       dto.countryOfOrigin ?? cur.countryOfOrigin,
       dto.targetCountries ?? cur.targetCountries,
       dto.researchInterests ?? cur.researchInterests,
-      dto.publications ?? cur.publications,
-      dto.workExperience ?? cur.workExperience,
-      dto.skills ?? cur.skills,
-      dto.gpaScale ?? cur.gpaScale,
     );
 
     return this.userRepo.update(user);

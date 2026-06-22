@@ -9,6 +9,16 @@ import { OpportunityOrmEntity } from "@/modules/opportunities/infrastructure/per
 import { documentRoutes } from "./presentation/document.routes";
 import { AppDataSource } from "@/infrastructure/database/app-data-source";
 
+import {
+  educationRepository,
+  experienceRepository,
+  publicationRepository,
+  testScoreRepository,
+  certificationRepository,
+  awardRepository,
+  refereeRepository,
+} from "@/modules/users/user.module";
+
 const documentOrmRepo = AppDataSource.getRepository(DocumentOrmEntity);
 const userOrmRepo = AppDataSource.getRepository(UserOrmEntity);
 const opportunityOrmRepo = AppDataSource.getRepository(OpportunityOrmEntity);
@@ -21,6 +31,13 @@ const documentService = new DocumentService(
   documentRepository,
   userRepository,
   opportunityRepository,
+  educationRepository,
+  experienceRepository,
+  publicationRepository,
+  testScoreRepository,
+  certificationRepository,
+  awardRepository,
+  refereeRepository,
 );
 
 export const documentController = new DocumentController(documentService);
