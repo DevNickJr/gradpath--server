@@ -86,4 +86,8 @@ export class OpportunityService {
 
     return this.opportunityRepo.search(filters);
   }
+
+  async getStats() {
+    return this.opportunityRepo.getStats();
+  }
 }

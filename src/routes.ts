@@ -18,6 +18,8 @@ import { applicationRouter } from "@/modules/applications/application.module";
 import { notificationRouter } from "@/modules/notifications/notification.module";
 import { commentRouter } from "@/modules/comments/comment.module";
 import { inquiryRouter } from "@/modules/inquiries/inquiry.module";
+import { subscriptionRouter } from "@/modules/subscriptions/subscription.module";
+import { recommendationRouter } from "@/modules/recommendations/recommendation.module";
 
 const V1 = '/api/v1'
 
@@ -38,4 +40,6 @@ export function registerRoutes(app: Express) {
   app.use(`${V1}/applications`, applicationRouter);
   app.use(`${V1}/notifications`, notificationRouter);
   app.use(`${V1}/inquiries`, inquiryRouter);
+  app.use(`${V1}/subscriptions`, subscriptionRouter);
+  app.use(`${V1}/recommendations`, recommendationRouter);
 }

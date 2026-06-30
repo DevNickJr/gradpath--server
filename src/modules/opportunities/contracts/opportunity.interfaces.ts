@@ -24,10 +24,17 @@ export interface OpportunitySearchFilters {
   sortOrder?: "ASC" | "DESC";
 }
 
+export interface OpportunityStats {
+  opportunities: number;
+  universities: number;
+  countries: number;
+}
+
 export interface OpportunityRepository {
   create(opportunity: Opportunity): Promise<Opportunity>;
   findById(id: string): Promise<Opportunity | null>;
   update(opportunity: Opportunity): Promise<Opportunity>;
   delete(id: string): Promise<void>;
   search(filters: OpportunitySearchFilters): Promise<PaginatedResult<Opportunity>>;
+  getStats(): Promise<OpportunityStats>;
 }

@@ -7,6 +7,7 @@ export class User {
     public password: string,
     public role: RolesEnum = RolesEnum.STUDENT,
     public isVerified: boolean = false,
+    public subscriptionPlan: string = "free",
     public profile?: UserProfile,
     public createdAt: Date = new Date(),
     public updatedAt: Date = new Date()

@@ -18,6 +18,7 @@ import {
   awardRepository,
   refereeRepository,
 } from "@/modules/users/user.module";
+import { usageService } from "@/modules/subscriptions/subscription.module";
 
 const documentOrmRepo = AppDataSource.getRepository(DocumentOrmEntity);
 const userOrmRepo = AppDataSource.getRepository(UserOrmEntity);
@@ -38,6 +39,7 @@ const documentService = new DocumentService(
   certificationRepository,
   awardRepository,
   refereeRepository,
+  usageService,
 );
 
 export const documentController = new DocumentController(documentService);

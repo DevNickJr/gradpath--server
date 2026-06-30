@@ -14,6 +14,9 @@ import { RefereeRepository } from "@/modules/users/contracts/referee.interfaces"
 import { UserProfile } from "@/modules/users/domain/user";
 import { buildPrompt, EnrichedProfile } from "./prompt-builder";
 import { chatCompletion } from "@/infrastructure/ai/openai.client";
+import { UsageService } from "@/modules/subscriptions/application/usage.service";
+import { UsageAction } from "@/modules/subscriptions/domain/usage-record";
+import { SubscriptionPlan } from "@/modules/subscriptions/domain/subscription";
 import CustomError from "@/shared/utils/custom-error";
 import logger from "@/shared/utils/logger";
 
@@ -38,11 +41,25 @@ export class DocumentService {
     private readonly certificationRepo: CertificationRepository,
     private readonly awardRepo: AwardRepository,
     private readonly refereeRepo: RefereeRepository,
+    private readonly usageService: UsageService,
   ) {}
 
   async generateDocument(userId: string, dto: GenerateDocumentDTO) {
     const user = await this.userRepo.findById(userId);
     if (!user) throw new CustomError("User not found", 404);
+
+    const plan = user.subscriptionPlan || SubscriptionPlan.FREE;
+
+    // Cold email is Pro-only
+    if (dto.type === "cold_email" && plan === SubscriptionPlan.FREE) {
+      throw new CustomError(
+        "Cold email generation is a Pro feature. Please upgrade your plan.",
+        403,
+      );
+    }
+
+    // Check and increment document generation usage
+    await this.usageService.checkAndIncrement(userId, UsageAction.DOCUMENT_GENERATION, plan);
 
     const profile = user.profile || new UserProfile("", "", "", "");
 

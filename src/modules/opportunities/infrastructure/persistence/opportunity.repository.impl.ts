@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { OpportunityRepository, PaginatedResult, OpportunitySearchFilters } from "@/modules/opportunities/contracts/opportunity.interfaces";
+import { OpportunityRepository, PaginatedResult, OpportunitySearchFilters, OpportunityStats } from "@/modules/opportunities/contracts/opportunity.interfaces";
 import { Opportunity } from "@/modules/opportunities/domain/opportunity";
 import { OpportunityOrmEntity } from "./opportunity.orm-entity";
 import { OpportunityMapper } from "./opportunity.mapper";
@@ -87,6 +87,22 @@ export class OpportunityRepositoryImpl implements OpportunityRepository {
       page,
       limit,
       totalPages: Math.ceil(total / limit),
+    };
+  }
+
+  async getStats(): Promise<OpportunityStats> {
+    const result = await this.ormRepo
+      .createQueryBuilder("opp")
+      .select("COUNT(*)", "opportunities")
+      .addSelect("COUNT(DISTINCT opp.university)", "universities")
+      .addSelect("COUNT(DISTINCT opp.country)", "countries")
+      .where("opp.isActive = :isActive", { isActive: true })
+      .getRawOne();
+
+    return {
+      opportunities: parseInt(result?.opportunities ?? "0", 10),
+      universities: parseInt(result?.universities ?? "0", 10),
+      countries: parseInt(result?.countries ?? "0", 10),
     };
   }
 }

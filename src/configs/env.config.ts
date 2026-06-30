@@ -39,6 +39,11 @@ const envSchema = z.object({
   GROQ_MODEL: z.string().default('openai/gpt-oss-20b'), // groq/compound (free - 250 req/day)
   GEMINI_API_KEY: z.string(),
   GEMINI_MODEL: z.string().default('gemini-2.5-flash'),
+
+  // Flutterwave
+  FLUTTERWAVE_SECRET_KEY: z.string().optional().default(''),
+  FLUTTERWAVE_PUBLIC_KEY: z.string().optional().default(''),
+  FLUTTERWAVE_WEBHOOK_HASH: z.string().optional().default(''),
 });
 
 const parsed = envSchema.safeParse(process.env);

@@ -19,6 +19,9 @@ export class UserOrmEntity {
   @Column({ default: false })
   isVerified!: boolean;
 
+  @Column({ default: "free" })
+  subscriptionPlan!: string;
+
   @OneToOne(() => UserProfileOrmEntity, profile => profile.user, { cascade: true, eager: true })
   profile?: UserProfileOrmEntity;
 

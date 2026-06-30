@@ -53,4 +53,13 @@ export class OpportunityController {
       next(error);
     }
   };
+
+  stats = async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      const stats = await this.opportunityService.getStats();
+      res.json({ success: true, data: stats });
+    } catch (error) {
+      next(error);
+    }
+  };
 }

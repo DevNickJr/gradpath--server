@@ -27,6 +27,7 @@ export class UserMapper {
       entity.password,
       entity.role as RolesEnum,
       entity.isVerified,
+      entity.subscriptionPlan || "free",
       profile,
       entity.createdAt,
       entity.updatedAt,
@@ -41,6 +42,7 @@ export class UserMapper {
     entity.password = user.password;
     entity.role = user.role;
     entity.isVerified = user.isVerified;
+    entity.subscriptionPlan = user.subscriptionPlan || "free";
     entity.createdAt = user.createdAt;
     entity.updatedAt = user.updatedAt;
 

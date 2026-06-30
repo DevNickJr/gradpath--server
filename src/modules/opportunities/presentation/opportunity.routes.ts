@@ -11,7 +11,8 @@ export const opportunityRoutes = (controller: OpportunityController) => {
   
   // Public
   router.get("/", validateRequest([SearchOpportunityQuerySchema]), controller.search);
-  
+  router.get("/stats", controller.stats);
+
   // Admin only
   router.post(
     "/",
